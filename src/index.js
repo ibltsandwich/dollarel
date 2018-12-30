@@ -1,9 +1,10 @@
-const DomNodeCollection = require("./dom_node_collection");
+const DOMNodeCollection = require("./dom_node_collection");
+const RMDemo = require('./rmdemo');
 
 let funcs = [];
 let ready = false;
 
-window.$l = (selector) => {
+$l = (selector) => {
   if (typeof selector === 'function') {
     return documentReadyCallback(selector);
   } else if (typeof selector === 'string') {
@@ -30,23 +31,23 @@ $l.ajax = (options) => {
   };
 
   
-  options = window.$l.extend(defaults, options);
+  options = $l.extend(defaults, options);
   options.method = options.method.toUpperCase();
   
   
-  const p = new Promise((resolve, reject) => {
+  const promise = new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest();
     xhr.open(options.method, options.url);
     xhr.onload = () => {
       if (xhr.status === 200) {
-        resolve(xhr.response);
+        resolve(JSON.parse(xhr.response));
       } else {
-        reject(xhr.response);
+        reject(JSON.parse(xhr.response));
       }
     };
-    xhr.send(JSON.stringify(options.data));
+    xhr.send();
   })
-  return p;
+  return promise;
 }
 
 documentReadyCallback = (arg) => {
@@ -66,3 +67,18 @@ document.addEventListener('DOMContentLoaded', () => {
   funcs.forEach(func => func());
   funcs = [];
 });
+
+
+// Rick and Morty Demo
+
+let ep1;
+$l.ajax({
+  method: 'GET',
+  url: 'https://rickandmortyapi.com/api/episode'
+})
+  .then(response => ep1 = response)
+
+
+showEpisode = (episode) => {
+  const root = $l("#root");
+}

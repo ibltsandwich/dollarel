@@ -1,4 +1,4 @@
-class DomNodeCollection {
+class DOMNodeCollection {
   constructor(elements) {
     this.elements = elements
   }
@@ -73,7 +73,7 @@ class DomNodeCollection {
 
   find(selector) {
     let result = [];
-    this.array.forEach((el) => {
+    this.elements.forEach((el) => {
       const descendants = Array.from(el.querySelectorAll(selector));
       result = result.concat(descendants);
     });
@@ -82,26 +82,26 @@ class DomNodeCollection {
   }
 
   remove() {
-    this.array.forEach((el) => {
+    this.elements.forEach((el) => {
       el.remove("outerHTML");
     });
 
-    this.array = [];
+    this.elements = [];
   }
 
   on(event, callback) {
-    this.array.forEach((el) => {
+    this.elements.forEach((el) => {
       el.addEventListener(event, callback);
       el.callback = callback;
     });
   }
 
   off(event) {
-    this.array.forEach((el) => {
+    this.elements.forEach((el) => {
       el.removeEventListener(event, el.callback);
     });
   }
 }
 
 
-module.exports = DomNodeCollection;
+module.exports = DOMNodeCollection;
