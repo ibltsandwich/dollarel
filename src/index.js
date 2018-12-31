@@ -57,6 +57,8 @@ documentReadyCallback = (arg) => {
 }
 
 cssHtmlCallback = (arg) => {
+  // if (arg === 'document')
+  // console.log(arg)
   const nodes = document.querySelectorAll(arg);
   const nodeArr = Array.from(nodes);
   return new DOMNodeCollection(nodeArr);
@@ -70,8 +72,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 // Rick and Morty Demo
-
-let characters = [];
 
 document.addEventListener('DOMContentLoaded', () => {
   const root = $l("#root");
@@ -112,19 +112,9 @@ showEpisode = (episode) => {
 
       <div class='ep-info'><h3>Air Date</h3>
       <h3 id="episode-date">${episode.air_date}</h3></div>
-
-      <div class='character-container'><h3>Characters</h3>
-        <ul id='character-list${episode.id}'></ul>
-      </div>
     </li>`
   )
-  retrieveCharacters(episode);
 }
-
-$l.ajax({
-  method: 'GET',
-  url: 'https://rickandmortyapi.com/api/character'
-}).then(response => console.log(response))
 
 
 retrieveCharacters = (episode) => {
@@ -134,10 +124,11 @@ retrieveCharacters = (episode) => {
     $l.ajax({
       method: 'GET',
       url: `${char}`
-    }).then(response => 
+    }).then(response => {
+      characters.push(response);
       charList.append(
         `<li><img src=${response.image}></img></li>`
-      )
+      )}
     )
   })
 }
