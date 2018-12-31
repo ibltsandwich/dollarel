@@ -1,15 +1,4 @@
-const $l = require('./index.js')
 
-class RMDemo {
-  constructor(){
-
-  }
-
-  showEpisode(episode) {
-    
-  }
-
-}
 // $l.ajax({
 //   method: 'GET',
 //   url: 'https://rickandmortyapi.com/api/episode'

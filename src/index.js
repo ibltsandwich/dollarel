@@ -71,14 +71,73 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Rick and Morty Demo
 
-let ep1;
+let characters = [];
+
+document.addEventListener('DOMContentLoaded', () => {
+  const root = $l("#root");
+  root.append("<img class='logo' src='./images/Rick_and_Morty.svg'></img>")
+  root.append("<h1 class='episode-list-header'>EPISODE LIST</h1>");
+  root.append("<div class='episode-list-container'></div>")
+
+  $l(".episode-list-container").append("<ul class='episode-list'></ul>");
+
+})
+
 $l.ajax({
   method: 'GET',
   url: 'https://rickandmortyapi.com/api/episode'
 })
-  .then(response => ep1 = response)
+  .then(response => response.results.forEach(episode => {
+    showEpisode(episode);
+  }))
+  .then(() => 
+    $l.ajax({
+      method: 'GET',
+      url: 'https://rickandmortyapi.com/api/episode/?page=2'
+    })
+    .then(response => response.results.forEach(episode => {
+      showEpisode(episode);
+    })))
+
 
 
 showEpisode = (episode) => {
-  const root = $l("#root");
+  $l(".episode-list").append(
+    `<li class='episode-item' id='${episode.id}'>
+      <div class='ep-info'><h2>Title</h2>
+      <h2 id="episode-name">${episode.name}</h2></div>
+
+      <div class='ep-info'><h2>Episode</h2>
+      <h2 id="episode-number">${episode.episode}</h2></div>
+
+      <div class='ep-info'><h3>Air Date</h3>
+      <h3 id="episode-date">${episode.air_date}</h3></div>
+
+      <div class='character-container'><h3>Characters</h3>
+        <ul id='character-list${episode.id}'></ul>
+      </div>
+    </li>`
+  )
+  retrieveCharacters(episode);
+}
+
+$l.ajax({
+  method: 'GET',
+  url: 'https://rickandmortyapi.com/api/character'
+}).then(response => console.log(response))
+
+
+retrieveCharacters = (episode) => {
+  const charList = $l(`.character-list${episode.id}`)
+  console.log(charList)
+  episode.characters.forEach(char => {
+    $l.ajax({
+      method: 'GET',
+      url: `${char}`
+    }).then(response => 
+      charList.append(
+        `<li><img src=${response.image}></img></li>`
+      )
+    )
+  })
 }

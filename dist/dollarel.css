@@ -1,4 +1,4 @@
-/* html, body, div, span, applet, object, iframe,
+html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
 del, dfn, em, img, ins, kbd, q, s, samp,
@@ -19,23 +19,60 @@ time, mark, audio, video {
 	vertical-align: baseline;
 }
 
-article, aside, details, figcaption, figure, 
-footer, header, hgroup, menu, nav, section {
-	display: block;
-}
-body {
-	line-height: 1;
+ol, ul {
+  list-style: none;
 }
 
-blockquote, q {
-	quotes: none;
+body {
+  font-family: 'Cabin', sans-serif;
 }
-blockquote:before, blockquote:after,
-q:before, q:after {
-	content: '';
-	content: none;
+
+.episode-list-header {
+  text-align: center;
+  font-size: 2em;
+  margin: .5em 0;
 }
-table {
-	border-collapse: collapse;
-	border-spacing: 0;
-} */
+
+#episode-name {
+  text-align: right;
+}
+
+#episode-number {
+  text-align: right;
+}
+
+#episode-date {
+  text-align: right;
+}
+
+.logo {
+  display: block;
+  margin: 2em auto;
+  width: 20em;
+}
+
+.episode-list-container {
+  padding: 1em 3em;
+  background: black;
+}
+
+.episode-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.episode-item {
+  background: #222222;
+  color: #96ce4c;
+  margin: 1em;
+  padding: 1.5em;
+  width: 25%;
+  font-size: 1em;
+}
+
+.ep-info {
+  display: flex;
+  justify-content: space-between;
+  font-size: .8em;
+}
