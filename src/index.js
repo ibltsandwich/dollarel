@@ -1,10 +1,9 @@
 const DOMNodeCollection = require("./dom_node_collection");
-const RMDemo = require('./rmdemo');
 
 let funcs = [];
 let ready = false;
 
-$l = (selector) => {
+const $l = (selector) => {
   if (typeof selector === 'function') {
     return documentReadyCallback(selector);
   } else if (typeof selector === 'string') {
@@ -72,6 +71,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 // Rick and Morty Demo
+let characters = [];
+let episodes = [];
 
 document.addEventListener('DOMContentLoaded', () => {
   const root = $l("#root");
@@ -88,6 +89,7 @@ $l.ajax({
   url: 'https://rickandmortyapi.com/api/episode'
 })
   .then(response => response.results.forEach(episode => {
+    episodes.push(episode);
     showEpisode(episode);
   }))
   .then(() => 
@@ -96,10 +98,11 @@ $l.ajax({
       url: 'https://rickandmortyapi.com/api/episode/?page=2'
     })
     .then(response => response.results.forEach(episode => {
+      episodes.push(episode);
       showEpisode(episode);
-    })))
-
-
+    }))).then(response => {
+      retrieveCharacters();
+    })
 
 showEpisode = (episode) => {
   $l(".episode-list").append(
@@ -112,23 +115,33 @@ showEpisode = (episode) => {
 
       <div class='ep-info'><h3>Air Date</h3>
       <h3 id="episode-date">${episode.air_date}</h3></div>
+
+      <h3 id='character-header'>Characters</h3>
+      <div id='character-list${episode.id}' class='character-list'>
+      </div>
     </li>`
   )
 }
 
-
-retrieveCharacters = (episode) => {
-  const charList = $l(`.character-list${episode.id}`)
-  console.log(charList)
-  episode.characters.forEach(char => {
+retrieveCharacters = () => {
+  for (let i = 1; i <= 25; i++) {
     $l.ajax({
       method: 'GET',
-      url: `${char}`
+      url: `https://rickandmortyapi.com/api/character/?page=${i}`
     }).then(response => {
       characters.push(response);
-      charList.append(
-        `<li><img src=${response.image}></img></li>`
-      )}
-    )
-  })
+      response.results.forEach(character => {
+        episodes.forEach(episode => {
+          if (episode.characters.includes(character.url)){
+            $l(`#character-list${episode.id}`).append(
+              `<div class='character-item'>
+                <span class='character-name'>${character.name}</span>
+                <img class='character-image' src=${character.image} alt=${character.name} width="75"/>
+              </div>`
+            )
+          }
+        })
+      })
+    })
+  }
 }
