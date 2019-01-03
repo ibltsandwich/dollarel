@@ -39,13 +39,13 @@ class DOMNodeCollection {
     }
   }
 
-  addClass() {
+  addClass(string) {
     this.elements.forEach(el => {
       el.classList.add(string);
     });
   }
 
-  removeClass() {
+  removeClass(string) {
     this.elements.forEach(el => {
       el.classList.remove(string);
     });

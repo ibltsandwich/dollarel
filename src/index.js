@@ -70,7 +70,8 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-// Rick and Morty Demo
+// RICK AND MORTY DEMO
+
 let characters = [];
 let episodes = [];
 
@@ -108,11 +109,12 @@ $l.ajax({
       showEpisode(episode);
     }))).then(response => {
       retrieveCharacters();
+      $l(".episode-item").on('click', characterShowHide)
     })
 
 showEpisode = (episode) => {
   $l(".episode-list").append(
-    `<li class='episode-item' id='${episode.id}'>
+    `<li class='episode-item episode-${episode.id}' id='${episode.id}'>
       <div class='ep-info'><h2>Title</h2>
       <h2 id="episode-name">${episode.name}</h2></div>
 
@@ -122,8 +124,8 @@ showEpisode = (episode) => {
       <div class='ep-info'><h3>Air Date</h3>
       <h3 id="episode-date">${episode.air_date}</h3></div>
 
-      <h3 id='character-header'>Characters</h3>
-      <div id='character-list${episode.id}' class='character-list'>
+      <h3 id='character-header'>Click to Show/Hide Characters</h3>
+      <div id='character-list${episode.id}' class='character-list char-hidden'>
       </div>
     </li>`
   )
@@ -135,7 +137,7 @@ retrieveCharacters = () => {
       method: 'GET',
       url: `https://rickandmortyapi.com/api/character/?page=${i}`
     }).then(response => {
-      characters.push(response);
+      characters = characters.concat(response.results);
       response.results.forEach(character => {
         episodes.forEach(episode => {
           if (episode.characters.includes(character.url)){
@@ -149,5 +151,20 @@ retrieveCharacters = () => {
         })
       })
     })
+  }
+}
+
+characterShowHide = (e) => {
+  const episode = parseInt(e.currentTarget.id);
+  const charList = $l(`#character-list${episode}`);
+  debugger
+  if (Array.from(charList.elements[0].classList).includes("char-hidden")) {
+    charList.removeClass("char-hidden");
+    charList.addClass("char-show");
+    $l(`.episode-${episode}`).addClass("clicked");
+  } else {
+    charList.removeClass("char-show");
+    charList.addClass("char-hidden");
+    $l(`.episode-${episode}`).removeClass("clicked");
   }
 }
