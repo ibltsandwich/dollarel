@@ -1,5 +1,7 @@
 # dollarel
 
+[Demo Live Link](http://ibltsandwich.github.io/dollarel)
+
 dollarel is a library based on jQuery that allows for DOM manipulation and interaction.
 
 Users are able to select elements on the page by their tags or class/ids and edit the HTML directly through the API.

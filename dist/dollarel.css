@@ -75,6 +75,7 @@ body {
   padding: 1.5em;
   width: 25%;
   font-size: 1em;
+  border-radius: 10px;
 }
 
 .ep-info {
@@ -115,4 +116,31 @@ body {
 .character-list {
   display: flex;
   flex-wrap: wrap;
+}
+
+.header {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.personal-links {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  font-size: 2em;
+  color: white;
+}
+
+.links {
+  padding: 0 .3em;
+}
+
+i{
+  color: #00b0ca;
+}
+
+i:hover {
+  color: #94d041;
+  cursor: pointer;
 }

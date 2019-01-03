@@ -76,10 +76,16 @@ let episodes = [];
 
 document.addEventListener('DOMContentLoaded', () => {
   const root = $l("#root");
+  root.append("<div class='header' id='header'></div>")
   root.append("<img class='logo' src='./images/Rick_and_Morty.svg'></img>")
   root.append("<h1 class='episode-list-header'>EPISODE LIST</h1>");
   root.append("<div class='episode-list-container'></div>")
-
+  $l("#header").append("<ul class='personal-links' id='personal-links'></ul>")
+  $l("#personal-links").append("<li class='links' id='portfolio'><a href='https://ibltsandwich.github.io/' target=_blank'><i class='fas fa-home'></i></a><li>")
+  $l("#personal-links").append("<li class='links' id='linkedin'><a href='https://www.linkedin.com/in/brian-lee-blt/' target=_blank'><i class='fab fa-linkedin'></i></a><li>")
+  $l("#personal-links").append("<li class='links' id='github'><a href='https://github.com/ibltsandwich' target=_blank'><i class='fab fa-github-square'></i></a><li>")
+  $l("#personal-links").append("<li class='links' id='email'><a href='mailto:brianlee100891@gmail.com' target=_blank'><i class='fas fa-envelope'></i></a><li>")
+  $l(".links").attr
   $l(".episode-list-container").append("<ul class='episode-list'></ul>");
 
 })
