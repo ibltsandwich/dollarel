@@ -37,7 +37,7 @@ Appends the outerHTML of each element in the argument to the innerHTML of each e
 Removes all HTML of all the elements in the collection from the DOM and removes all elements from the collection itself.
 
 ### ```attr```
-Returns the specified attribute specified as an argument.
+Returns the attribute as specified in the argument.
 
 ### ```find```
 Returns a collection of the elements, which match the provided selectors, and are descendants of the element on which the method was called.
