@@ -157,14 +157,13 @@ retrieveCharacters = () => {
 characterShowHide = (e) => {
   const episode = parseInt(e.currentTarget.id);
   const charList = $l(`#character-list${episode}`);
-  debugger
   if (Array.from(charList.elements[0].classList).includes("char-hidden")) {
     charList.removeClass("char-hidden");
     charList.addClass("char-show");
     $l(`.episode-${episode}`).addClass("clicked");
   } else {
+    $l(`.episode-${episode}`).removeClass("clicked");
     charList.removeClass("char-show");
     charList.addClass("char-hidden");
-    $l(`.episode-${episode}`).removeClass("clicked");
   }
 }

@@ -25,7 +25,7 @@ ol, ul {
 
 body {
   font-family: 'Cabin', sans-serif;
-  background: black;
+  background: #f5f064;
 }
 .header {
   position: absolute;
@@ -63,6 +63,7 @@ i:hover {
 
 #character-header {
   font-size: .8em;
+  color: #f5f064;
 }
 
 #episode-name {
@@ -84,8 +85,8 @@ i:hover {
 }
 
 .episode-list-container {
-  padding: 1em 3em;
-  background: black;
+  padding: 1em 1em;
+  background: #00b0ca;
 }
 
 .episode-list {
@@ -100,13 +101,15 @@ i:hover {
   margin: 1em;
   padding: 1.5em;
   width: 25%;
-  font-size: 1em;
+  font-size: 1.1em;
   border-radius: 10px;
   height: 100%;
   max-height: 100px;
-  -webkit-transition: max-height .8s;
-	-moz-transition: max-height .8s;
-  transition: max-height .8s;
+  -webkit-transition: max-height .8s ease;
+  -moz-transition: max-height .8s ease;
+  -o-transition: max-height .8s ease;
+  transition: max-height .8s ease;
+  -ms-transition: max-height .8s ease;
   overflow: hidden;
 }
 
@@ -150,19 +153,25 @@ i:hover {
 }
 
 .character-list {
-  display: none;
+  display: flex;
   flex-wrap: wrap;
   overflow: hidden;
+  max-height: 0;
+  -webkit-transition: max-height .8s ease;
+  -moz-transition: max-height .8s ease;
+  -o-transition: max-height .8s ease;
+  transition: max-height .8s ease;
+  -ms-transition: max-height .8s ease;
 }
 
 .char-hidden {
-  display: none;
+
 }
 
 .char-show {
-  display: flex;
+  max-height: 2000px;
 }
 
 .clicked {
-  max-height: 1500px;
+  max-height: 2000px;
 }
